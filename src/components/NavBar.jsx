@@ -2,19 +2,22 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { CartWidget } from './CartWidget';
+import {NavLink} from 'react-router-dom';
+import data from '../data/data.json';
 
-const menu = [
-    {text: "Home", link: "#home"},
-    {text: "Products", link:"#products"},
-    {text: "Pricing", link:"#pricing"}
-]
+const categorias = data.map(producto => producto.category)
+const unique = new Set(categorias)
+
 
 export const NavBar = () =>( 
       <Navbar bg="light" variant="light">
         <Container>
           <Navbar.Brand href="#home">GameShop</Navbar.Brand>
           <Nav className="me-auto">
-            {menu.map((item) => <Nav.Link href={item.link}>{item.text}</Nav.Link>)}
+            {[...unique].map((item) => 
+            <NavLink key={item} className="nav-link" to={`/category/${item}`}>
+              {item}
+              </NavLink>)}
           </Nav>
           <CartWidget/>
         </Container>

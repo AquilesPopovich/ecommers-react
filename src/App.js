@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { ItemListContainer } from "./components/ItemListContainer";
+import { ItemDetailContainer } from "./components/ItemDetailContainer";
 import {NavBar} from "./components/NavBar"
 
 function App() {
@@ -9,10 +10,13 @@ function App() {
     <NavBar/>
     <Routes>
       <Route path="/" element={
-        <ItemListContainer greetings="Hello World"/>
+        <ItemListContainer greetings="Productos"/>
       } />
        <Route path="/category/:id" element={
-        <ItemListContainer greetings="Hello World"/>
+        <ItemListContainer greetings="Productos"/>
+      } />
+      <Route path="/item/:id" element={
+        <ItemDetailContainer/>
       } />
     </Routes>
     
