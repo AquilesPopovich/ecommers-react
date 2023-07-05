@@ -5,17 +5,21 @@ import { useParams } from "react-router-dom";
 import ItemDetail from './ItemDetail'
 
 export const ItemDetailContainer = (props) => { 
-    const [product, setProductos] = useState([]);
+    const [product, setProductos] = useState({});
+    const { id } = useParams();
 
     
 
     useEffect(() => {
       pedirDatos()
         .then((resultado) =>{
-                setProductos(resultado);
-            
+            const productEncontrado = resultado.find((product) => product.id == id);
+            setProductos(productEncontrado || {});
         })
-    }, [])
+        .catch((error) => {
+            console.log("Error al obtener los datos:", error);
+          });
+    }, [id])
 return( 
 
     <div>
